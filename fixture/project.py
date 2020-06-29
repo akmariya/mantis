@@ -9,7 +9,7 @@ class ProjectHelper:
 
     def open_project_page(self):
         driver = self.app.driver
-        driver.find_element_by_xpath('//*[@id="sidebar"]/ul/li[7]/a/i').click()
+        driver.find_element_by_link_text("Управление").click()
         driver.find_element_by_link_text("Управление проектами").click()
 
     def get_project_list(self):
@@ -26,6 +26,15 @@ class ProjectHelper:
             project_description = project[4].text
             group_list.append(Project(id=project_id, name=project_name, description=project_description))
         return group_list
+
+    def count_projects(self):
+        driver = self.app.driver
+        self.open_project_page()
+        try:
+            l = len(driver.find_elements_by_xpath("//*[@id='main-container']/div[2]/div[2]/div/div/div[2]/div[2]/div/div[2]/table/tbody/tr"))
+        except:
+            l = 0
+        return l
 
     def add_project(self, project):
         driver = self.app.driver
