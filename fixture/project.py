@@ -55,7 +55,7 @@ class ProjectHelper:
             adress = project_el[0].find_element_by_tag_name("a").get_attribute("href")
             project_id_str = re.search("id=.*", adress).group(0)
             project_id = project_id_str[3:len(project_id_str)]
-            if project_id == project.id:
+            if int(project_id) == project.id:
                 project_el[0].find_element_by_tag_name("a").click()
                 break
         driver.find_element_by_xpath("//input[@value='Удалить проект']").click()
